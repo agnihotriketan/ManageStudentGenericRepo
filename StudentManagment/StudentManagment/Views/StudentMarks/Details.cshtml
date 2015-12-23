@@ -1,0 +1,36 @@
+﻿@model StudentManagment.Data.StudentMark
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>StudentMark</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SubjectId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SubjectId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Student.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Student.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Marks)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Marks)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

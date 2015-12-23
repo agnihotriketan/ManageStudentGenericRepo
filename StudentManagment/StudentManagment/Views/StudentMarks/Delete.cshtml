@@ -1,0 +1,40 @@
+﻿@model StudentManagment.Data.StudentMark
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>StudentMark</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SubjectId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SubjectId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Student.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Student.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Marks)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Marks)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
