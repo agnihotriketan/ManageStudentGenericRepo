@@ -184,6 +184,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ADOCrudController.cs" />
     <Compile Include="Controllers\GenericRepository.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -356,6 +357,11 @@
     <Content Include="Views\StudentMarks\Create.cshtml" />
     <Content Include="Views\StudentMarks\Edit.cshtml" />
     <Content Include="Views\StudentMarks\Delete.cshtml" />
+    <Content Include="Views\ADOCrud\Index.cshtml" />
+    <Content Include="Views\ADOCrud\Details.cshtml" />
+    <Content Include="Views\ADOCrud\Create.cshtml" />
+    <Content Include="Views\ADOCrud\Edit.cshtml" />
+    <Content Include="Views\ADOCrud\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
