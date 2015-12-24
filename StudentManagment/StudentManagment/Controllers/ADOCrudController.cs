@@ -127,7 +127,7 @@ namespace StudentManagment.Controllers
                 using (var conn = new SqlConnection(ConnString))
                 {
                     conn.Open();
-                    var query = "UPDATE [Student] SET [FirstName] = @FirstName,[LastName] = @LastName,[Percent] =100 WHERE StudentId=@StudentId";
+                    var query = "UPDATE [Student] SET [FirstName] = @FirstName,[LastName] = @LastName,[Percent] =@Percent WHERE StudentId=@StudentId";
                     var cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@StudentId", student.StudentId);
                     cmd.Parameters.AddWithValue("@FirstName", student.FirstName);
