@@ -22,7 +22,7 @@ namespace StudentManagment.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Student student = db.GetById(id);
+            var student = db.GetById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace StudentManagment.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Student student = db.GetById(id);
+            var student = db.GetById(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -73,7 +73,7 @@ namespace StudentManagment.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Student student = db.GetById(id);
+            var student = db.GetById(id);
 
             if (student == null)
             {
@@ -90,7 +90,7 @@ namespace StudentManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.GetById(id);
+            var student = db.GetById(id);
             db.Delete(student);
             return RedirectToAction("Index");
         }

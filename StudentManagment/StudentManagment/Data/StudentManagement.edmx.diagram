@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bce2495977f44aa3b46d21c00ae5fc7e" Name="Diagram1">
-        <EntityTypeShape EntityType="ketanModel.Student" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ketanModel.StudentMark" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="ketanModel.FK_StudentMarks_Student" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ketanModel.StudentMark" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="ketanModel.Student" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="ketanModel.FK_StudentMarks_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

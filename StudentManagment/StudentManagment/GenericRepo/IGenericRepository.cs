@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace StudentManagment.GenericRepo
@@ -17,6 +18,6 @@ namespace StudentManagment.GenericRepo
 
          bool Edit(TEntity obj);
 
-         IQueryable<TEntity> SearchFor(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate);
+         IQueryable<TEntity> SearchFor(Expression<Func<TEntity, bool>> predicate);
     }
 }

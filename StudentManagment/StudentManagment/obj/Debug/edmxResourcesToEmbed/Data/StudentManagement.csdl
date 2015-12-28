@@ -1,23 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ketanModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="ketanEntities" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="Students" EntityType="ketanModel.Student" />
     <EntitySet Name="StudentMarks" EntityType="ketanModel.StudentMark" />
+    <EntitySet Name="Students" EntityType="ketanModel.Student" />
     <AssociationSet Name="FK_StudentMarks_Student" Association="ketanModel.FK_StudentMarks_Student">
       <End Role="Student" EntitySet="Students" />
-      <End Role="StudentMarks" EntitySet="StudentMarks" />
+      <End Role="StudentMark" EntitySet="StudentMarks" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Student">
-    <Key>
-      <PropertyRef Name="StudentId" />
-    </Key>
-    <Property Name="StudentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
-    <Property Name="LastName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
-    <Property Name="Percent" Type="Double" />
-    <NavigationProperty Name="StudentMarks" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="Student" ToRole="StudentMarks" />
-  </EntityType>
   <EntityType Name="StudentMark">
     <Key>
       <PropertyRef Name="SubjectId" />
@@ -25,16 +15,26 @@
     <Property Name="SubjectId" Type="Int32" Nullable="false" />
     <Property Name="StudentId" Type="Int32" />
     <Property Name="Marks" Type="Double" />
-    <NavigationProperty Name="Student" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="StudentMarks" ToRole="Student" />
+    <NavigationProperty Name="Student" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="StudentMark" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Percent" Type="Double" />
+    <NavigationProperty Name="StudentMarks" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="Student" ToRole="StudentMark" />
   </EntityType>
   <Association Name="FK_StudentMarks_Student">
-    <End Role="Student" Type="ketanModel.Student" Multiplicity="0..1" />
-    <End Role="StudentMarks" Type="ketanModel.StudentMark" Multiplicity="*" />
+    <End Type="ketanModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="ketanModel.StudentMark" Role="StudentMark" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
         <PropertyRef Name="StudentId" />
       </Principal>
-      <Dependent Role="StudentMarks">
+      <Dependent Role="StudentMark">
         <PropertyRef Name="StudentId" />
       </Dependent>
     </ReferentialConstraint>

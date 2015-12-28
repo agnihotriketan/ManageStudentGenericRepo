@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -70,7 +72,7 @@ namespace StudentManagment.GenericRepo
             try
             {
 
-                _DbContext.Entry(obj).State = System.Data.EntityState.Modified;
+                _DbContext.Entry(obj).State = EntityState.Modified;
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -81,7 +83,7 @@ namespace StudentManagment.GenericRepo
             }
         }
 
-        public IQueryable<TEntity> SearchFor(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<TEntity> SearchFor(Expression<Func<TEntity, bool>> predicate)
         {
             return _DbSet.Where(predicate); 
         }

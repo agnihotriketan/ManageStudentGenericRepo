@@ -25,7 +25,7 @@ namespace StudentManagment.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Student> Students { get; set; }
         public DbSet<StudentMark> StudentMarks { get; set; }
+        public DbSet<Student> Students { get; set; }
     }
 }

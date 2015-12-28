@@ -1,22 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ketanModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="ketanModelStoreContainer">
-    <EntitySet Name="Student" EntityType="ketanModel.Store.Student" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="StudentMarks" EntityType="ketanModel.Store.StudentMarks" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_StudentMarks_Student" Association="ketanModel.Store.FK_StudentMarks_Student">
-      <End Role="Student" EntitySet="Student" />
-      <End Role="StudentMarks" EntitySet="StudentMarks" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Student">
-    <Key>
-      <PropertyRef Name="StudentId" />
-    </Key>
-    <Property Name="StudentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="varchar" MaxLength="500" />
-    <Property Name="LastName" Type="varchar" MaxLength="500" />
-    <Property Name="Percent" Type="float" />
-  </EntityType>
+<Schema Namespace="ketanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="StudentMarks">
     <Key>
       <PropertyRef Name="SubjectId" />
@@ -25,11 +8,20 @@
     <Property Name="StudentId" Type="int" />
     <Property Name="Marks" Type="float" />
   </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="500" />
+    <Property Name="LastName" Type="varchar" MaxLength="500" />
+    <Property Name="Percent" Type="float" />
+  </EntityType>
   <Association Name="FK_StudentMarks_Student">
-    <End Role="Student" Type="ketanModel.Store.Student" Multiplicity="0..1" />
-    <End Role="StudentMarks" Type="ketanModel.Store.StudentMarks" Multiplicity="*" />
+    <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+    <End Role="StudentMarks" Type="Self.StudentMarks" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Student">
+      <Principal Role="Students">
         <PropertyRef Name="StudentId" />
       </Principal>
       <Dependent Role="StudentMarks">
@@ -37,4 +29,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="ketanModelStoreContainer">
+    <EntitySet Name="StudentMarks" EntityType="Self.StudentMarks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_StudentMarks_Student" Association="Self.FK_StudentMarks_Student">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentMarks" EntitySet="StudentMarks" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

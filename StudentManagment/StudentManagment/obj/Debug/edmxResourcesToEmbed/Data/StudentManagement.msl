@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ketanModelStoreContainer" CdmEntityContainer="ketanEntities">
-    <EntitySetMapping Name="Students">
-      <EntityTypeMapping TypeName="ketanModel.Student">
-        <MappingFragment StoreEntitySet="Student">
-          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Percent" ColumnName="Percent" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="StudentMarks">
       <EntityTypeMapping TypeName="ketanModel.StudentMark">
         <MappingFragment StoreEntitySet="StudentMarks">
-          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
           <ScalarProperty Name="Marks" ColumnName="Marks" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="ketanModel.Student">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Percent" ColumnName="Percent" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

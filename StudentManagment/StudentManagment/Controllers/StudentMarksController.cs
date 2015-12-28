@@ -27,7 +27,7 @@ namespace StudentManagment.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            StudentMark studentmark = db.StudentMarks.Find(id);
+            var studentmark = db.StudentMarks.Find(id);
             if (studentmark == null)
             {
                 return HttpNotFound();
@@ -67,7 +67,7 @@ namespace StudentManagment.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            StudentMark studentmark = db.StudentMarks.Find(id);
+            var studentmark = db.StudentMarks.Find(id);
             if (studentmark == null)
             {
                 return HttpNotFound();
@@ -98,7 +98,7 @@ namespace StudentManagment.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            StudentMark studentmark = db.StudentMarks.Find(id);
+            var studentmark = db.StudentMarks.Find(id);
             if (studentmark == null)
             {
                 return HttpNotFound();
@@ -113,7 +113,7 @@ namespace StudentManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            StudentMark studentmark = db.StudentMarks.Find(id);
+            var studentmark = db.StudentMarks.Find(id);
             db.StudentMarks.Remove(studentmark);
             db.SaveChanges();
             return RedirectToAction("Index");

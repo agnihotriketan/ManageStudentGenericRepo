@@ -4,24 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ketanModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="ketanModelStoreContainer">
-          <EntitySet Name="Student" EntityType="ketanModel.Store.Student" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="StudentMarks" EntityType="ketanModel.Store.StudentMarks" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_StudentMarks_Student" Association="ketanModel.Store.FK_StudentMarks_Student">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="StudentMarks" EntitySet="StudentMarks" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="varchar" MaxLength="500" />
-          <Property Name="LastName" Type="varchar" MaxLength="500" />
-          <Property Name="Percent" Type="float" />
-        </EntityType>
+    <Schema Namespace="ketanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="StudentMarks">
           <Key>
             <PropertyRef Name="SubjectId" />
@@ -30,11 +13,20 @@
           <Property Name="StudentId" Type="int" />
           <Property Name="Marks" Type="float" />
         </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="500" />
+          <Property Name="LastName" Type="varchar" MaxLength="500" />
+          <Property Name="Percent" Type="float" />
+        </EntityType>
         <Association Name="FK_StudentMarks_Student">
-          <End Role="Student" Type="ketanModel.Store.Student" Multiplicity="0..1" />
-          <End Role="StudentMarks" Type="ketanModel.Store.StudentMarks" Multiplicity="*" />
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="StudentMarks" Type="Self.StudentMarks" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Student">
+            <Principal Role="Students">
               <PropertyRef Name="StudentId" />
             </Principal>
             <Dependent Role="StudentMarks">
@@ -42,29 +34,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+        <EntityContainer Name="ketanModelStoreContainer">
+          <EntitySet Name="StudentMarks" EntityType="Self.StudentMarks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_StudentMarks_Student" Association="Self.FK_StudentMarks_Student">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentMarks" EntitySet="StudentMarks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ketanModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ketanEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Students" EntityType="ketanModel.Student" />
           <EntitySet Name="StudentMarks" EntityType="ketanModel.StudentMark" />
+          <EntitySet Name="Students" EntityType="ketanModel.Student" />
           <AssociationSet Name="FK_StudentMarks_Student" Association="ketanModel.FK_StudentMarks_Student">
             <End Role="Student" EntitySet="Students" />
-            <End Role="StudentMarks" EntitySet="StudentMarks" />
+            <End Role="StudentMark" EntitySet="StudentMarks" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
-          <Property Name="LastName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
-          <Property Name="Percent" Type="Double" />
-          <NavigationProperty Name="StudentMarks" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="Student" ToRole="StudentMarks" />
-        </EntityType>
         <EntityType Name="StudentMark">
           <Key>
             <PropertyRef Name="SubjectId" />
@@ -72,42 +61,52 @@
           <Property Name="SubjectId" Type="Int32" Nullable="false" />
           <Property Name="StudentId" Type="Int32" />
           <Property Name="Marks" Type="Double" />
-          <NavigationProperty Name="Student" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="StudentMarks" ToRole="Student" />
+          <NavigationProperty Name="Student" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="StudentMark" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Percent" Type="Double" />
+          <NavigationProperty Name="StudentMarks" Relationship="ketanModel.FK_StudentMarks_Student" FromRole="Student" ToRole="StudentMark" />
         </EntityType>
         <Association Name="FK_StudentMarks_Student">
-          <End Role="Student" Type="ketanModel.Student" Multiplicity="0..1" />
-          <End Role="StudentMarks" Type="ketanModel.StudentMark" Multiplicity="*" />
+          <End Type="ketanModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="ketanModel.StudentMark" Role="StudentMark" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="StudentId" />
             </Principal>
-            <Dependent Role="StudentMarks">
+            <Dependent Role="StudentMark">
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ketanModelStoreContainer" CdmEntityContainer="ketanEntities">
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="ketanModel.Student">
-              <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Percent" ColumnName="Percent" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="StudentMarks">
             <EntityTypeMapping TypeName="ketanModel.StudentMark">
               <MappingFragment StoreEntitySet="StudentMarks">
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Marks" ColumnName="Marks" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="ketanModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Percent" ColumnName="Percent" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -128,6 +127,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
