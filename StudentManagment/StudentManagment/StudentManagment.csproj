@@ -189,6 +189,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentMarksController.cs" />
+    <Compile Include="Data\GetStudentById_Result.cs">
+      <DependentUpon>StudentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ManageStudents_Result.cs">
+      <DependentUpon>StudentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RecordLog.cs">
+      <DependentUpon>StudentManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Student.cs">
       <DependentUpon>StudentManagement.tt</DependentUpon>
     </Compile>
@@ -208,6 +217,18 @@
       <DependentUpon>StudentManagement.edmx</DependentUpon>
     </Compile>
     <Compile Include="Data\StudentMark.cs">
+      <DependentUpon>StudentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserProfile.cs">
+      <DependentUpon>StudentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\webpages_Membership.cs">
+      <DependentUpon>StudentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\webpages_OAuthMembership.cs">
+      <DependentUpon>StudentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\webpages_Roles.cs">
       <DependentUpon>StudentManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />

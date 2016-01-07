@@ -5,9 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bce2495977f44aa3b46d21c00ae5fc7e" Name="Diagram1">
-        <EntityTypeShape EntityType="ketanModel.StudentMark" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="ketanModel.Student" Width="1.5" PointX="0.75" PointY="0.875" />
-        <AssociationConnector Association="ketanModel.FK_StudentMarks_Student" />
+        <EntityTypeShape EntityType="ketanModel.RecordLog" Width="1.5" PointX="3.9278925191275276" PointY="21.056239987284055" />
+        <EntityTypeShape EntityType="ketanModel.UserProfile" Width="1.5" PointX="5.0557207861243381" PointY="12.194406291560458" />
+        <EntityTypeShape EntityType="ketanModel.webpages_Membership" Width="1.5" PointX="5.0817516302139278" PointY="28.01056043617919" />
+        <EntityTypeShape EntityType="ketanModel.webpages_OAuthMembership" Width="1.5" PointX="11.832487938847621" PointY="25.094287749889439" />
+        <EntityTypeShape EntityType="ketanModel.webpages_Roles" Width="1.5" PointX="4.6477705690300883" PointY="26.927225721500452" />
+        <AssociationConnector Association="ketanModel.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

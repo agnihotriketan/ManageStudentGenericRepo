@@ -12,6 +12,9 @@ namespace StudentManagment.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class ketanEntities : DbContext
     {
@@ -27,5 +30,29 @@ namespace StudentManagment.Data
     
         public DbSet<StudentMark> StudentMarks { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<RecordLog> RecordLogs { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<webpages_Membership> webpages_Membership { get; set; }
+        public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
+        public DbSet<webpages_Roles> webpages_Roles { get; set; }
+    
+        public virtual ObjectResult<GetStudentById_Result> GetStudentById(Nullable<int> studentId)
+        {
+            var studentIdParameter = studentId.HasValue ?
+                new ObjectParameter("StudentId", studentId) :
+                new ObjectParameter("StudentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudentById_Result>("GetStudentById", studentIdParameter);
+        }
+    
+        public virtual ObjectResult<ManageStudents_Result> ManageStudents()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ManageStudents_Result>("ManageStudents");
+        }
+    
+        public virtual int OutDemo(ObjectParameter count)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("OutDemo", count);
+        }
     }
 }

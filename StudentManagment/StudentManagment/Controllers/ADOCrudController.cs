@@ -55,6 +55,32 @@ namespace StudentManagment.Controllers
             {
                 return HttpNotFound();
             }
+            // Execute Sp 
+            /* using (var con= new SqlConnection(_connString))
+             {
+                 con.Open();
+                 var command = new SqlCommand("GetStudentById", con);
+                 command.CommandType = CommandType.StoredProcedure;
+                 command.Parameters.Add("@StudentId", 2);
+                var  adapter = new SqlDataAdapter(command);
+                var dt = new DataTable();
+                adapter.Fill(dt); 
+             }*/
+
+            //Execute Sp with out parameter
+            using (var conn = new SqlConnection(_connString))
+            {
+                conn.Open();
+                var comm = new SqlCommand("OutDemo", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                int x = 0;
+                comm.Parameters.Add("@Count", SqlDbType.Int);
+                comm.Parameters["@Count"].Direction = ParameterDirection.Output;
+                comm.ExecuteNonQuery();
+                ViewBag.Count = 0; 
+                ViewBag.Count = comm.Parameters["@Count"].Value.ToString();
+            }
+
             GetStudentById(id, student);
             return View(student);
         }
