@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,7 +13,18 @@ namespace StudentManagment.Controllers
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
+            GetRouteData();
+
             return View();
+        }
+
+        private void GetRouteData()
+        {
+            string area = Request.RequestContext.RouteData.DataTokens.ContainsKey("area") ? Request.RequestContext.RouteData.DataTokens["area"].ToString() : "";
+            string controller = Request.RequestContext.RouteData.Values["controller"].ToString();
+            string action = Request.RequestContext.RouteData.Values["action"].ToString();
+
+            ViewBag.RouteDataInfo = "Area-" + area + "Controller-" + controller + "Action-" + action;
         }
 
         public ActionResult About()
@@ -28,5 +40,8 @@ namespace StudentManagment.Controllers
 
             return View();
         }
+
+
+       
     }
 }

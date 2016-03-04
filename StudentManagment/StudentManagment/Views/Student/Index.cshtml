@@ -7,7 +7,11 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create") 
+
+    <a id="GetApi">
+        Hit Api
+    </a>
 </p>
 <table>
     <tr>
@@ -43,3 +47,34 @@
 }
 
 </table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#GetApi").click(function myfunction() {
+           
+
+            var serviceURL = '/api/StudApi/GetStudents';
+
+            $.ajax({
+                type: "GET",
+                url: serviceURL,
+                data: param = "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: successFunc,
+                error: errorFunc
+            });
+            
+          
+        });
+        function successFunc(data, status) {
+            alert(data);
+        }
+
+        function errorFunc(e) {
+            console.log(e);
+            alert('error');
+        }
+    </script>
+}
