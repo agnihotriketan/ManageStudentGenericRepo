@@ -27,5 +27,38 @@ namespace StudentManagment
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine()); 
         }
+        protected void Application_Error()
+        {
+            var obj = Server.GetLastError();
+        }
+
+        protected void Application_EndRequest()
+        {
+            var statusCode = HttpContext.Current.Response.StatusCode;
+
+            switch (statusCode)
+            {
+                case 400:
+                    Response.Clear();
+                    Response.Redirect("Error");
+                    //bad request
+                    break;
+                case 500:
+                    Response.Clear();
+                    Response.Redirect("Error");
+                    //Server Error
+                    break;
+                case 404:
+                    Response.Clear();
+                    Response.Redirect("Error");
+                    //Page not found  
+                    break;
+
+                default:
+
+                    break;
+            }
+
+        }
     }
 }
